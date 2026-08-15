@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enquire — Geometric Tattoos, Birkirkara Malta | Scotty Massa</title>
-  <meta name="description" content="Enquire about a large-scale custom geometric or ornamental tattoo with Scotty Massa at Massa Tattoo Social Club in Birkirkara, Malta. Send your idea — real reply in 2–5 days." />
+  <meta name="description" content="Start a booking enquiry with Scotty Massa at Massa Tattoo Social Club in Birkirkara, Malta. Get the full process, pricing and next steps by email." />
   <link rel="canonical" href="https://scottymassa.com/booking.html" />
   <link rel="icon" href="/assets/seo/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/assets/seo/apple-touch-icon.png" />
   <meta property="og:title" content="Enquire — Geometric Tattoos, Birkirkara Malta | Scotty Massa" />
-  <meta property="og:description" content="Enquire about a large-scale custom geometric or ornamental tattoo with Scotty Massa at Massa Tattoo Social Club in Birkirkara, Malta. Send your idea, real reply in 2–5 days." />
+  <meta property="og:description" content="Start a booking enquiry with Scotty Massa at Massa Tattoo Social Club in Birkirkara, Malta. Get the full process, pricing and next steps by email." />
   <meta property="og:url" content="https://scottymassa.com/booking.html" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/assets/seo/og-default.png" />
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Scotty Massa" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Enquire — Geometric Tattoos, Birkirkara Malta | Scotty Massa" />
-  <meta name="twitter:description" content="Enquire about a large-scale custom geometric or ornamental tattoo with Scotty Massa at Massa Tattoo Social Club in Birkirkara, Malta. Send your idea, real reply in 2–5 days." />
+  <meta name="twitter:description" content="Start a booking enquiry with Scotty Massa at Massa Tattoo Social Club in Birkirkara, Malta. Get the full process, pricing and next steps by email." />
   <meta name="twitter:image" content="/assets/seo/og-default.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -66,9 +66,9 @@
     <main id="main">
   <section class="page-header">
     <div class="container">
-      <p class="eyebrow" style="justify-content:center;">Booking</p>
+      <p class="eyebrow" style="justify-content:center;">Booking — Step 1 of 2</p>
       <h1>Start a session</h1>
-      <p class="lead mx-auto">Tell me what you're thinking. Real answer in 2–5 days.</p>
+      <p class="lead mx-auto">Say hello and I'll send you the full process, pricing and next steps by email — no waiting on a reply for this part.</p>
     </div>
   </section>
 
@@ -76,86 +76,37 @@
     <div class="container">
       <div class="split">
         <div>
-          <p class="eyebrow">Booking form</p>
-          <h2>Your idea.</h2>
-          <p>The more detail the better — references, placement, rough size and timing all help me give you a real answer fast.</p>
+          <p class="eyebrow">Say hello</p>
+          <h2>Who's asking?</h2>
+          <p>Just your name and email for now. You'll get an email straight away covering how booking works, pricing, and a link to the full application when you're ready for it.</p>
           <p class="script" style="font-size:2rem;">— Looking forward.</p>
         </div>
 
-        <form class="form" onsubmit="event.preventDefault(); alert('Thanks — we\\'ll be in touch.');">
-          <div class="form__row">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" required placeholder="Your full name" />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required placeholder="you@email.com" />
-            </div>
-          </div>
-
-          <div class="form__row">
-            <div class="field">
-              <label for="phone">Phone / Instagram</label>
-              <input id="phone" name="phone" type="text" placeholder="@handle or number" />
-            </div>
-            <div class="field">
-              <label for="timing">Timeframe</label>
-              <select id="timing" name="timing">
-                <option>As soon as possible</option>
-                <option>In the next few months</option>
-                <option>Later this year</option>
-                <option>Just planning ahead</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form__row">
-            <div class="field">
-              <label for="style">Style</label>
-              <select id="style" name="style">
-                <option>Geometric</option>
-                <option>Mandala</option>
-                <option>Sacred geometry</option>
-                <option>Dotwork</option>
-                <option>Blackwork</option>
-                <option>Ornamental</option>
-                <option>Not sure yet</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="size">Size</label>
-              <select id="size" name="size">
-                <option>Large (20cm+)</option>
-                <option>Sleeve / half-sleeve</option>
-                <option>Back or full leg</option>
-                <option>Bodysuit / long-term build</option>
-              </select>
-            </div>
+        <form class="form" data-booking-lead-form novalidate>
+          <div class="visually-hidden" aria-hidden="true">
+            <label for="company">Leave this field empty</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
           </div>
 
           <div class="field">
-            <label for="placement">Placement</label>
-            <input id="placement" name="placement" type="text" placeholder="Forearm, ribs, thigh, full back…" />
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required placeholder="Your full name" autocomplete="name" />
           </div>
-
           <div class="field">
-            <label for="idea">Your idea</label>
-            <textarea id="idea" name="idea" rows="6" placeholder="Tell me about the piece. References, story, anything that helps." required></textarea>
-          </div>
-
-          <div class="field">
-            <label for="refs">Reference images (links)</label>
-            <input id="refs" name="refs" type="text" placeholder="Drive / Dropbox / IG post links" />
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" />
           </div>
 
           <div class="field field--check">
-            <input id="age" name="age" type="checkbox" required />
-            <label for="age">I confirm I'm 18 or over.</label>
+            <input id="marketingConsent" name="marketingConsent" type="checkbox" />
+            <label for="marketingConsent">I'd also like occasional emails from Scotty about guest spots, travel dates, flash releases and conventions.</label>
           </div>
 
-          <button type="submit" class="btn btn--primary">Send Request</button>
-          <p style="font-size:0.85rem; color: var(--smoke); margin:0;">A 30% deposit is required to lock in a date. You'll get a link once we've confirmed your idea.</p>
+          <p style="font-size:0.85rem; color: var(--smoke); margin:0;">By submitting, you'll receive an email covering the booking process, pricing and next steps. See the <a href="privacy.html">privacy notice</a> for how your details are used and how to opt out at any time.</p>
+
+          <p class="form__status" data-form-status role="status" aria-live="polite"></p>
+
+          <button type="submit" class="btn btn--primary">Continue</button>
         </form>
       </div>
     </div>
@@ -188,5 +139,6 @@
   <script src="shared/js/mandala.js"></script>
   <script src="shared/js/main.js"></script>
   <script src="shared/js/consult-popup.js"></script>
+  <script src="shared/js/booking-lead-form.js"></script>
 </body>
 </html>

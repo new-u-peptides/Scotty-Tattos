@@ -111,6 +111,55 @@ Next.js / Astro / WordPress later if needed.
 
 ---
 
+## Booking flow (scottymassa.com)
+
+Two steps, per `docs` discussion with Scotty on how premium enquiries should
+be filtered before they reach his calendar:
+
+1. **`booking.html`** — name + email, plus a *separate, unticked* checkbox
+   for general marketing (guest spots/travel/flash/conventions). Posts to
+   `api/booking-lead.js`, which emails the client the process/pricing brief
+   and pings the studio inbox, then redirects to `booking-thank-you.html`.
+2. **`booking-thank-you.html`** — offers both paths: jump straight into
+   `booking-application.html` now, or wait for the process email and come
+   back later. Either way the lead is already captured.
+3. **`booking-application.html`** — the full structured application
+   (origin, placement, scale, concept, reference images, body-area photos,
+   18+ / photo-ID / pricing acknowledgements). Posts multipart form data to
+   `api/booking-application.js`, which emails the complete application
+   (with attachments) to the studio inbox and confirms receipt to the
+   client. Lands on `booking-application-received.html`.
+
+`privacy.html` documents what's collected and why, and is linked from both
+forms and the footer.
+
+**Email** is sent via [Resend](https://resend.com) (`api/_lib/email.js`,
+a plain `fetch` wrapper — no SDK dependency). Configure `RESEND_API_KEY`,
+`RESEND_FROM_EMAIL` and `BOOKING_NOTIFY_EMAIL` as Vercel project env vars —
+see `.env.example`.
+
+**File uploads** go straight through the serverless function as email
+attachments (no object storage yet) — capped client- and server-side at
+2MB/file, 3 files per field, ~4MB combined, to stay under Vercel's request
+body limit. If that turns out to be too tight in practice, the fix is
+switching to direct-to-[Vercel Blob](https://vercel.com/docs/storage/vercel-blob)
+client uploads rather than raising the cap.
+
+### Deliberately not built yet
+
+This pass is front-end + email-relay only. Scotty separately sketched a
+much larger system (CRM-style lead states, lead scoring, a review
+dashboard, Calendly + Google Calendar, Stripe deposits, an automated
+training funnel) — all of it is sound direction, but each piece needs
+either a real third-party account (Calendly, Stripe, an ESP like AWeber)
+or an infrastructure decision (which database, which auth) that's out of
+scope for a static-site PR. Treat this as Phase 1: every enquiry still
+reaches the studio inbox and every Step-1 lead still gets captured (via
+the internal notification email), just without persistence, scoring, or
+automation beyond the two transactional emails above.
+
+---
+
 ## massatattoo.com (`massatattoo/`)
 
 The Massa Tattoo studio brand — multi-artist, six pages, partial-based
@@ -235,7 +284,9 @@ Safari). Key gates: CSS custom properties, `clip-path: polygon()`,
 - [x] 880–980 px tightening on massatattoo so the layout doesn't read airless once the nav collapses.
 - [ ] Drop real photography into `assets/images/` (scottymassa) and
       replace SVG placeholders in `massatattoo/portfolio.html`.
-- [ ] Wire booking forms on both sites to a real submission endpoint.
+- [x] Wire scottymassa.com's booking flow to a real submission endpoint
+      (see "Booking flow" below). `massatattoo/contact.html`'s booking form
+      is still a client-side stub — not in scope for this pass.
 - [ ] Per-site `sitemap.xml` for massatattoo (scottymassa already has one).
 - [ ] Lighthouse pass on both sites — target 100/100/100/100.
 - [ ] When ready, split into two GitHub repositories.
