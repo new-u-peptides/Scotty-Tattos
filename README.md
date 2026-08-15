@@ -145,18 +145,26 @@ body limit. If that turns out to be too tight in practice, the fix is
 switching to direct-to-[Vercel Blob](https://vercel.com/docs/storage/vercel-blob)
 client uploads rather than raising the cap.
 
+**Lead scoring** (`api/_lib/leadScore.js`) computes a stateless 0–100 "how
+promising is this" score at submission time from the fields already on the
+application (style fit, scale, travel commitment, reference material,
+concept detail). It's shown only in the studio's internal notification
+email as a triage aid — never to the client, and never used to auto-decline
+anything. Adjust the weights there as Scotty's actual acceptance patterns
+become clear.
+
 ### Deliberately not built yet
 
 This pass is front-end + email-relay only. Scotty separately sketched a
-much larger system (CRM-style lead states, lead scoring, a review
-dashboard, Calendly + Google Calendar, Stripe deposits, an automated
-training funnel) — all of it is sound direction, but each piece needs
-either a real third-party account (Calendly, Stripe, an ESP like AWeber)
-or an infrastructure decision (which database, which auth) that's out of
-scope for a static-site PR. Treat this as Phase 1: every enquiry still
-reaches the studio inbox and every Step-1 lead still gets captured (via
-the internal notification email), just without persistence, scoring, or
-automation beyond the two transactional emails above.
+much larger system (CRM-style lead states, a review dashboard, Calendly +
+Google Calendar, Stripe deposits, an automated training funnel) — all of
+it is sound direction, but each piece needs either a real third-party
+account (Calendly, Stripe, an ESP like AWeber) or an infrastructure
+decision (which database, which auth) that's out of scope for a
+static-site PR. Treat this as Phase 1: every enquiry still reaches the
+studio inbox and every Step-1 lead still gets captured (via the internal
+notification email), just without persistence or automation beyond the
+two transactional emails above.
 
 ---
 

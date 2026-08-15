@@ -12,6 +12,7 @@
 const busboy = require('busboy');
 const { sendEmail } = require('./_lib/email');
 const { isValidEmail, cleanText, cleanMultiline, escapeHtml, escapeMultiline } = require('./_lib/util');
+const { scoreApplication } = require('./_lib/leadScore');
 
 const MAX_FILE_BYTES = 2 * 1024 * 1024; // 2MB per file
 const MAX_FILES_PER_FIELD = 3;
@@ -127,6 +128,7 @@ module.exports = async (req, res) => {
     phone: cleanText(fields.phone, 60),
     origin: cleanText(fields.origin, 60),
     projectType: cleanText(fields.projectType, 60),
+    style: cleanText(fields.style, 60),
     placement: cleanText(fields.placement, 120),
     scale: cleanText(fields.scale, 60),
     workType: cleanText(fields.workType, 60),
@@ -160,15 +162,15 @@ module.exports = async (req, res) => {
     content: f.buffer.toString('base64'),
   }));
 
+  const counts = { referenceCount: files.referenceImages.length, bodyPhotoCount: files.bodyPhotos.length };
+  const score = scoreApplication(data, counts);
+
   try {
     await sendEmail({
       to: NOTIFY_EMAIL,
       replyTo: data.email,
-      subject: `Booking application: ${data.name}${data.projectType ? ' — ' + data.projectType : ''}`,
-      html: applicationEmailHtml(data, {
-        referenceCount: files.referenceImages.length,
-        bodyPhotoCount: files.bodyPhotos.length,
-      }),
+      subject: `Booking application: ${data.name}${data.projectType ? ' — ' + data.projectType : ''} (${score.score}/100)`,
+      html: applicationEmailHtml(data, counts, score),
       attachments,
     });
   } catch (err) {
@@ -198,17 +200,20 @@ function row(label, value) {
   return `<tr><td style="padding:6px 16px 6px 0; color:#666; vertical-align:top; white-space:nowrap;">${escapeHtml(label)}</td><td style="padding:6px 0;">${escapeHtml(value)}</td></tr>`;
 }
 
-function applicationEmailHtml(data, counts) {
+function applicationEmailHtml(data, counts, score) {
   return `
   <div style="font-family: Georgia, 'Times New Roman', serif; max-width: 640px; color: #1a1a1a; line-height: 1.6;">
     <p style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #C8102E; margin: 0 0 12px;">Booking application</p>
-    <h1 style="font-size: 20px; margin: 0 0 20px;">${escapeHtml(data.name)}</h1>
+    <h1 style="font-size: 20px; margin: 0 0 8px;">${escapeHtml(data.name)}</h1>
+    <p style="display:inline-block; font-size: 12px; font-weight: bold; letter-spacing: 0.05em; padding: 4px 10px; border: 1px solid #C8102E; color: #C8102E; margin: 0 0 20px;">${score.score}/100 · ${escapeHtml(score.label)}</p>
+    <p style="font-size: 12px; color: #888; margin: -12px 0 20px;">A rough triage signal, not a verdict — always your call.</p>
 
     <table style="border-collapse:collapse; width:100%;">
       ${row('Email', data.email)}
       ${row('Phone', data.phone)}
       ${row('Travelling from', data.origin)}
       ${row('Project', data.projectType)}
+      ${row('Style', data.style)}
       ${row('Placement', data.placement)}
       ${row('Scale', data.scale)}
       ${row('Work type', data.workType)}
