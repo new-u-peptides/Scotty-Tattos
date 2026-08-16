@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanks — Scotty Massa</title>
+  <meta name="description" content="Your booking enquiry is in. Check your inbox for the full process, or start your booking application right away." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://scottymassa.com/booking-thank-you.html" />
+  <link rel="icon" href="/assets/seo/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/seo/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Tangerine:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body data-nav-current="booking">
+
+    <div data-include="partials/header.html"></div>
+
+
+    <main id="main">
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow" style="justify-content:center;">Thanks</p>
+      <h1 id="ty-heading">Got it.</h1>
+      <p class="lead mx-auto">An email is on its way with the full process, pricing and what to expect — take your time with it.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Ready now?</p>
+          <h2>Start your application.</h2>
+          <p>If you already know what you want, skip ahead — the full booking application takes your idea, references and a couple of photos of the area you want tattooed, and puts it straight in front of Scotty.</p>
+          <a href="booking-application.html" class="btn btn--primary">Start Your Booking Application</a>
+        </div>
+        <div>
+          <p class="eyebrow">Prefer to read first?</p>
+          <h2>Check your inbox.</h2>
+          <p>We've sent you an email covering exactly how booking works — pricing, deposits, what happens at consultation, and timelines. The application link is at the bottom whenever you're ready. Didn't see it? Check spam, or email <a href="mailto:studio@scottymassa.com">studio@scottymassa.com</a> directly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+    </main>
+
+
+    <div data-include="partials/footer.html"></div>
+
+  <script src="shared/js/includes.js"></script>
+  <script src="shared/js/mandala.js"></script>
+  <script src="shared/js/main.js"></script>
+  <script>
+    (function () {
+      try {
+        var name = sessionStorage.getItem('sm-booking-name');
+        if (name) {
+          var h1 = document.getElementById('ty-heading');
+          if (h1) h1.textContent = 'Got it, ' + name.trim().split(/\s+/)[0] + '.';
+        }
+      } catch (e) { /* sessionStorage unavailable — the generic heading stands */ }
+    })();
+  </script>
+</body>
+</html>
